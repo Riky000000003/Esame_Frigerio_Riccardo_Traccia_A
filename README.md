@@ -11,5 +11,7 @@ TCP Comandi da utilizzare:
 
 
 HTTP comandi da utilizzare: 
+
 metodo GET: cmd=all, cmd=all_vegans, cmd=most_caloric
+
 metodo POST: {"cmd":"all"},{"cmd":"all_vegans"}, {"cmd":"most_caloric"}
