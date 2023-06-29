@@ -66,25 +66,42 @@ public class ClientHandler implements  Runnable{
                 e.printStackTrace();
                 return false;
             }
-
             out.println("Working on...");
+
+            Command cmd  = null;
+
+            try {
+                cmd = g.fromJson(s, Command.class);
+            } catch (Exception e) {
+                ////
+            }
+
+            if(cmd!=null)
+            {
+                cmd = g.fromJson(s, Command.class);
+            }
             out.println("Answer: ");
-            String result = executeCommand(s);
+            String result = executeCommand(cmd);
             out.println(result);
         }
     }
 
-    private String executeCommand(String s)
+    private String executeCommand(Command cmd)
     {
-        if(s.equals("all"))
+        if(cmd==null)
+        {
+            return "Error command not recognized";
+        }
+
+        if(cmd.cmd.equals("all"))
         {
             return menuP.getListAsJSON();
         }
-        else if(s.equals("all_vegans"))
+        else if(cmd.cmd.equals("all_vegans"))
         {
             return menuP.getListAsJSON(menuP.viewPiatti());
         }
-        else if(s.equals("most_caloric"))
+        else if(cmd.cmd.equals("most_caloric"))
         {
             return menuP.getListAsJSON(menuP.mostCaloric());
         }
